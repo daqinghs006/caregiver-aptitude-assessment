@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1f705b" />
+  <meta name="description" content="居服職涯適性自我評估：透過八道題目了解自己的同理心、耐心、責任感、尊重、學習意願、細心觀察、溝通及適應能力。" />
+  <title>居服職涯｜適性自我評估</title>
+  <style>
+    :root {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", "Heiti TC", system-ui, sans-serif;
+      color: #203d36;
+      background: #f7faf8;
+      font-synthesis: none;
+      --green: #216d58;
+      --darkgreen: #144d40;
+      --mint: #eaf4ec;
+      --pink: #fce9ea;
+      --salmon: #e97990;
+      --line: #dbe9df;
+      --muted: #698079;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; line-height: 1.65; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible + label { outline: 3px solid #ed8796; outline-offset: 3px; }
+    .shell { width: min(1160px, calc(100% - 36px)); margin: 0 auto; }
+    .site-header { padding: 22px 0 18px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 900; font-size: 17px; color: var(--darkgreen); letter-spacing: .035em; }
+    .brand-icon { display: grid; place-items: center; height: 38px; width: 38px; border-radius: 12px; background: #deeee3; font-size: 20px; }
+    .site-tag { font-size: 13px; color: #50786b; background: #eff6f1; border: 1px solid #d8e8dc; border-radius: 99px; padding: 5px 13px; }
+    .hero { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: 1.35fr .85fr; gap: 30px; align-items: center; background: linear-gradient(125deg,#185641 4%,#247761 100%); border-radius: 28px; padding: clamp(25px,4.8vw,60px); color: #fff; box-shadow: 0 18px 45px #185b4920; }
+    .hero::before { content:""; position:absolute; width: 420px; height: 420px; right: -105px; top: -205px; background:#b6e2a91c; border-radius: 50%; z-index:-1; }
+    .hero::after { content:""; position:absolute; width: 350px; height: 350px; left: 35%; bottom:-295px; border-radius:50%; border:85px solid #ffffff0a; z-index:-1; }
+    .eyebrow { display: inline-flex; gap: 8px; align-items: center; background: #ffffff20; border: 1px solid #ffffff3d; color: #f2faef; border-radius: 99px; padding: 6px 14px; font-size: 13px; font-weight: 700; }
+    h1 { font-size: clamp(31px, 3.9vw, 51px); line-height: 1.25; margin: 18px 0 14px; letter-spacing: .028em; }
+    h1 span { color: #ffd1d9; }
+    .hero-desc { color: #e1f0e8; font-size: 16px; margin:0; max-width: 600px; }
+    .hero-stats { display:flex; flex-wrap:wrap; gap: 26px; margin-top: 25px; }
+    .stat { display:flex; flex-direction:column; line-height:1.3; }
+    .stat strong { font-size: 21px; font-weight: 900; }
+    .stat small { color:#c9e9dc; margin-top:4px; font-size:12px; }
+    .hero-message { background: #ffffffed; color: #245144; border-radius: 23px; padding: 27px 27px 24px; box-shadow: 0 8px 30px #093e2c2a; transform: rotate(1.2deg); }
+    .heart { text-align:center; font-size: 50px; line-height:1.2; margin: 6px 0 16px; }
+    .hero-message h2 { font-size: 22px; line-height:1.4; margin: 0 0 7px; text-align:center; }
+    .hero-message p { color: #658078; font-size: 14px; text-align:center; margin:0; }
+    .hero-message .message-note { display:block; text-align:center; margin-top:17px; padding-top:13px; font-size:13px; border-top:1px dashed #c7dcd2; color:#d0687d; font-weight:700; }
+    .intro { margin: 32px 0 21px; display: flex; align-items:end; justify-content:space-between; gap: 20px; }
+    .section-tag { color:#c96d80; font-size: 13px; font-weight: 900; letter-spacing:.12em; }
+    h2.section-title { margin: 3px 0 0; font-size: clamp(23px,2.5vw,31px); line-height:1.45; letter-spacing:.02em; color:#1d4c3f; }
+    .intro-explainer { color:var(--muted); max-width: 400px; font-size: 14px; margin:0; }
+    .progress-panel { background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px 21px; box-shadow: 0 4px 17px #1b5b3c08; margin-bottom:21px; }
+    .progress-top { display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:10px; }
+    .progress-top strong { font-size: 14px; }
+    .progress-top span { font-size: 14px; color:var(--green); font-weight: 900; font-variant-numeric:tabular-nums; }
+    .progress-track { height: 10px; border-radius:20px; background:#eaf2ed; overflow:hidden; }
+    .progress-fill { width:0%; height:100%; border-radius:20px; background:linear-gradient(90deg,#69b69a,#e98b9d); transition:width .22s ease; }
+    .questions { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:19px; }
+    .question-card { background:white; border: 1.5px solid #dcebe0; border-radius:20px; padding:25px; box-shadow: 0 5px 20px #325c4208; min-width:0; transition:border-color .2s, box-shadow .2s, transform .2s; }
+    .question-card.answered { border-color:#9acfb1; box-shadow:0 6px 22px #2a8a5930; }
+    .question-head { display:flex; align-items:center; gap:12px; }
+    .num { width:42px; height:42px; background:#e7f3ec; border-radius:13px; color:#227055; font-size:21px; font-weight:900; display:grid; place-items:center; flex-shrink:0; }
+    .ability { color:#bd6878; background:#feeff1; border-radius:99px; padding:4px 12px; font-size:13px; font-weight:800; }
+    .question-card h3 { margin: 17px 0 7px; font-size: clamp(17px,1.8vw,20px); line-height:1.55; color:#183e35; min-height:62px; }
+    .hint { margin:0 0 17px; font-size:13px; color:#7b8b83; }
+    .choices { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+    .choice { position:relative; min-width:0; }
+    .choice input { position:absolute; opacity:0; width:1px; height:1px; top:50%; left:50%; }
+    .choice label { user-select:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:72px; border:1.5px solid #e3ebe5; border-radius:12px; background:#fafcfb; color:#536b61; transition: background .15s,border-color .15s,box-shadow .15s; }
+    .choice label:hover { border-color: #8dbbaa; background:#f3faf5; }
+    .choice input:checked + label { background:#e6f4eb; color:#146244; border-color:#308b67; box-shadow:inset 0 0 0 1px #308b67; }
+    .choice .choice-name {font-size:14px; font-weight:800; white-space:nowrap;}
+    .choice small { font-size:12px; color:#84938b; margin-top:2px; }
+    .choice input:checked + label small {color:#237257;}
+    .action-area { text-align:center; padding:30px 15px 35px; }
+    .action-note { margin: 0 0 13px; font-size:14px; color:#789087; }
+    .primary-btn, .secondary-btn { border:0; border-radius:13px; padding:14px 25px; display:inline-flex; align-items:center; gap:9px; justify-content:center; font-weight:900; line-height:1.4; }
+    .primary-btn { color:white; background:linear-gradient(95deg,#216e58,#329070); box-shadow:0 8px 21px #2d7b5736; }
+    .primary-btn:hover:not(:disabled) { filter:brightness(1.07); }
+    .primary-btn:disabled { cursor:not-allowed; opacity:.52; box-shadow:none; }
+    .secondary-btn { border:1px solid #d5e5da; color:#245948; background:#fff; }
+    .secondary-btn:hover { background:#eff7f1; }
+    .result { display:none; scroll-margin-top:24px; margin-bottom:42px; background:white; border:1px solid #d7e7da; border-radius:25px; overflow:hidden; box-shadow:0 11px 33px #1b583916; }
+    .result.visible { display:block; animation:appear .32s ease; }
+    @keyframes appear { from{opacity:0;transform:translateY(12px)} to {opacity:1;transform:translateY(0)} }
+    .result-head {padding:28px clamp(20px,4vw,42px); display:grid; grid-template-columns:150px 1fr; gap:30px; align-items:center; background: linear-gradient(105deg,#e7f6e9,#fcf0ef); }
+    .score-circle { width:150px; height:150px; border:10px solid #c8e5d0; border-radius:50%; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff; box-shadow:0 8px 26px #286c4521; }
+    .score-number { font-size:54px; color:#1f7657; font-weight:900; line-height:1; font-variant-numeric:tabular-nums; }
+    .score-denom { color:#84958a; font-size:14px; }
+    .result-head .result-label { display:inline-block; padding:4px 11px; border-radius:30px; font-size:12px; background:#ffffffbd; color:#b96173; font-weight:900; }
+    .result-head h2 { color:#204e41; font-size:clamp(23px,3vw,33px); margin:8px 0 8px; line-height:1.35; }
+    .result-head p { margin:0; color:#4f6d5e; font-size:15px; }
+    .result-body { padding:26px clamp(20px,4vw,42px) 30px; }
+    .result-subtitle { margin:0 0 15px; color:#234e40; font-size:20px; }
+    .score-breakdown { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 28px; }
+    .breakdown-line {display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:5px; font-size:14px;}
+    .breakdown-line strong {color:#2b5546;}
+    .breakdown-line span {color:#67796e; font-size:13px; white-space:nowrap;}
+    .mini-track { height:8px; background:#edf1ed; border-radius:99px; overflow:hidden; }
+    .mini-fill { height:100%; background:linear-gradient(90deg,#71b89c,#24916a); border-radius:99px; transition:width .3s; }
+    .divider { border:0; border-top:1px solid #e4eee6; margin:28px 0 24px; }
+    .coach { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .coach-panel { border-radius:15px; padding:18px 19px; background:#f2f8f4; }
+    .coach-panel.next { background:#fff4f1; }
+    .coach-panel h4 {margin:0 0 8px; color:#245544; font-size:16px; }
+    .coach-panel.next h4 {color:#a65c69;}
+    .coach-panel p, .coach-panel ul { margin:0; font-size:14px; color:#506b5d; padding-left:0; }
+    .coach-panel li {list-style:none; margin:6px 0; }
+    .coach-panel li::before {content:"• "; font-weight:900;color:#3e9070;}
+    .result-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:25px; }
+    .disclaimer { color:#7c8980; font-size:12px; margin:20px 0 0; }
+    .scoring { display:grid; grid-template-columns:.9fr 2fr; gap:19px; margin:3px 0 35px; }
+    .scoring-box { background:#e9f5e9; padding:23px 25px; border-radius:19px; }
+    .scoring-box h3 { color:#226a56; margin:0 0 7px; font-size:18px; }
+    .scoring-box p { margin:0; color:#42675b; font-size:15px; }
+    .ranges { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+    .range { border:1px solid #e0ebe2; border-radius:16px; background:#fff; overflow:hidden; min-width:0; }
+    .range strong {display:block; padding:8px 6px; text-align:center; font-size:17px; color:white; }
+    .range p {font-size:13px; line-height:1.55; padding:12px 13px 14px; margin:0; color:#4d675c; text-align:center; }
+    .range.great strong {background:#e78097;}
+    .range.mid strong {background:#edb746;}
+    .range.grow strong {background:#71a7d4;}
+    .bottom-quote { text-align:center; font-size: clamp(16px,2vw,21px); margin:18px 0 12px; color:#2c7460; font-weight:900; letter-spacing:.02em; }
+    footer { border-top: 1px solid #e3ebe3; text-align:center; color:#84928a; font-size:12px; padding:19px 0 30px; }
+    @media (max-width:850px) {
+      .hero {grid-template-columns:1fr; gap:25px;}
+      .hero-message { transform:none; max-width:400px; }
+      .scoring {grid-template-columns:1fr;}
+    }
+    @media (max-width:680px) {
+      .shell {width:min(100% - 22px,560px);}
+      .site-header {padding:15px 0;}
+      .brand {font-size:15px;}
+      .site-tag {font-size:11px;padding:5px 9px;}
+      .hero {border-radius:18px; padding:26px 22px;}
+      .hero-message {display:none;}
+      .hero-desc {font-size:14px;}
+      .hero-stats {gap:25px;margin-top:21px;}
+      .intro {align-items:start; flex-direction:column; margin:25px 5px 16px; gap:5px;}
+      .intro-explainer {font-size:13px;}
+      .questions {grid-template-columns:1fr;gap:12px;}
+      .question-card {padding:19px;border-radius:16px;}
+      .question-card h3 {min-height:unset;font-size:18px;margin-top:13px;}
+      .choice label {min-height:65px;}
+      .choice .choice-name {font-size:13px;}
+      .result-head {grid-template-columns:1fr;gap:16px;justify-items:start;}
+      .score-circle {height:114px;width:114px;border-width:7px;}
+      .score-number {font-size:42px;}
+      .score-breakdown {grid-template-columns:1fr;}
+      .coach {grid-template-columns:1fr;gap:10px;}
+      .ranges {grid-template-columns:1fr;}
+      .range {display:grid;grid-template-columns:100px 1fr;align-items:center;}
+      .range strong {height:100%;display:grid;place-items:center;font-size:15px;}
+      .range p {text-align:left;}
+      .result-actions {flex-direction:column;}
+      .result-actions button {width:100%;}
+    }
+    @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto;} *,*::before,*::after{animation:none!important;transition:none!important;} }
+    @media print {
+      @page { size:A4; margin:14mm; }
+      html,body {background:#fff;color:#111;font-size:11pt;}
+      .site-header,.intro,.progress-panel,.questions,.action-area,.scoring,footer,.result-actions {display:none!important;}
+      .shell {width:100%;max-width:none;}
+      .hero {padding:12px 15px;color:#163b2d;background:#eef6ef;box-shadow:none;display:block;border-radius:8px;margin-bottom:15px;}
+      .hero h1 {font-size:22pt;margin:7px 0;}
+      .hero h1 span {color:#2e765c;}
+      .hero .hero-desc {color:#365949;}
+      .hero-stats,.hero-message,.eyebrow {display:none;}
+      .result.visible {display:block;box-shadow:none;border:1px solid #ccc;margin:0;}
+      .result-head {padding:20px;grid-template-columns:105px 1fr;background:#edf5ef;}
+      .score-circle {width:95px;height:95px;border:5px solid #a6cfb1;}
+      .score-number {font-size:36px;}
+      .result-head h2 {font-size:19pt;}
+      .result-body {padding:20px;}
+      .coach-panel,.coach-panel.next {background:#f6f8f6;}
+      .disclaimer {font-size:9pt;}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <div class="brand"><span class="brand-icon" aria-hidden="true">🌱</span> 居服職涯適性自評</div>
+      <div class="site-tag">免登入 · 無需提供個資</div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="main-title">
+        <div>
+          <div class="eyebrow">💗 居服職涯 · 自我探索</div>
+          <h1 id="main-title">你適合從事<br /><span>居家照顧服務</span>嗎？</h1>
+          <p class="hero-desc">照顧不只是技術，更是一種態度。透過 8 道簡單的情境題，探索自己的照顧特質與職涯方向。</p>
+          <div class="hero-stats" aria-label="評估資訊">
+            <div class="stat"><strong>8 題</strong><small>情境自我評估</small></div>
+            <div class="stat"><strong>約 3 分鐘</strong><small>簡單快速作答</small></div>
+            <div class="stat"><strong>24 分</strong><small>評估最高分</small></div>
+          </div>
+        </div>
+        <div class="hero-message" aria-hidden="true">
+          <div class="heart">👩🏻‍⚕️ 💕 👵🏻</div>
+          <h2>每一份用心照顧<br />都從理解開始</h2>
+          <p>同理、耐心、尊重與責任感，都是照顧工作不可或缺的特質。</p>
+          <span class="message-note">用一份小小的測驗，更認識自己 ♡</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="questions-title">
+        <div class="intro">
+          <div>
+            <div class="section-tag">SELF ASSESSMENT</div>
+            <h2 class="section-title" id="questions-title">開始你的適性自我評估</h2>
+          </div>
+          <p class="intro-explainer">請依照自己平常的想法與做法，選擇最符合的答案。沒有標準答案，也不用刻意選最高分。</p>
+        </div>
+
+        <div class="progress-panel" aria-live="polite" aria-atomic="true">
+          <div class="progress-top"><strong>填答進度</strong><span id="progress-count">已完成 0／8 題</span></div>
+          <div class="progress-track" role="progressbar" aria-label="完成進度" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+        <div class="questions" id="questions-list"></div>
+        <div class="action-area" id="action-area">
+          <p class="action-note" id="action-note">選完全部 8 題，就會自動產生專屬評估結果。</p>
+          <button class="primary-btn" id="show-result" type="button" disabled>查看我的評估結果 ✨</button>
+        </div>
+      </section>
+
+      <section class="result" id="result" aria-labelledby="result-title" aria-live="polite">
+        <div class="result-head">
+          <div class="score-circle"><div class="score-number" id="total-score">—</div><div class="score-denom">／24 分</div></div>
+          <div><span class="result-label" id="result-label">評估結果</span><h2 id="result-title"></h2><p id="result-description"></p></div>
+        </div>
+        <div class="result-body">
+          <h3 class="result-subtitle">八項照顧特質一覽</h3>
+          <div class="score-breakdown" id="score-breakdown"></div>
+          <hr class="divider" />
+          <div class="coach">
+            <div class="coach-panel"><h4>🌟 你目前的優勢</h4><div id="strengths"></div></div>
+            <div class="coach-panel next"><h4>🌿 可以繼續培養的能力</h4><div id="improvements"></div></div>
+          </div>
+          <div class="result-actions">
+            <button class="primary-btn" id="print-result" type="button">🖨️ 列印／儲存 PDF</button>
+            <button class="secondary-btn" id="copy-result" type="button">📋 複製結果摘要</button>
+            <button class="secondary-btn" id="reset-answers" type="button">↻ 重新填寫</button>
+          </div>
+          <p class="disclaimer">提醒：這是一份用來認識自己的非正式職涯探索工具，結果不是錄用標準、資格認定或心理測驗診斷。請搭配實際工作內容、教育訓練及個人興趣綜合考量。作答資料只在目前頁面計算，不會傳送至伺服器。</p>
+        </div>
+      </section>
+
+      <section class="scoring" aria-label="計分方式與結果說明">
+        <div class="scoring-box"><h3>📋 計分方式</h3><p>不太符合 <strong>1 分</strong><br />部分符合 <strong>2 分</strong><br />非常符合 <strong>3 分</strong><br /><br />共 8 題，總分 8～24 分。</p></div>
+        <div class="ranges">
+          <div class="range great"><strong>20～24 分</strong><p>具備許多居服工作相關特質，適合進一步探索居服職涯。</p></div>
+          <div class="range mid"><strong>15～19 分</strong><p>已具備部分照顧特質，可透過招募說明會及培訓進一步準備。</p></div>
+          <div class="range grow"><strong>8～14 分</strong><p>可以進一步探索照顧工作的興趣，透過說明會了解更多。</p></div>
+        </div>
+      </section>
+      <div class="bottom-quote">有愛心，是起點；有責任感，是基礎；願意持續學習，才能走得長久。🌱</div>
+    </main>
+    <footer>居服職涯適性自我評估 · 你的每一個答案，都值得被尊重。</footer>
+  </div>
+
+  <script>
+    (() => {
+      'use strict';
+      const questions = [
+        { title: '看到行動不方便的長者，我願意主動關心與協助。', trait: '同理心', hint: '站在別人的立場思考', tip: '主動關心長者的需要，先詢問意願，再提供適切協助。' },
+        { title: '遇到長者動作緩慢或重複說話，我通常能耐心等待。', trait: '耐心', hint: '情緒穩定，不急不躁', tip: '試著放慢節奏，給長者充足的表達與行動時間。' },
+        { title: '我重視守時與承諾，能對自己的工作負責。', trait: '責任感', hint: '守時守信，讓人安心', tip: '善用行事曆與提醒工具，練習準時、確認工作事項並落實交班。' },
+        { title: '即使長者的生活習慣與我不同，我仍能尊重。', trait: '尊重', hint: '維護長者尊嚴與選擇', tip: '理解個別差異，先聆聽長者的習慣與偏好，尊重其選擇。' },
+        { title: '遇到不會的照顧技巧，我願意接受訓練與指導。', trait: '學習意願', hint: '願意學習，持續進步', tip: '參與照顧相關訓練，碰到不熟悉的操作時先請教專業人員。' },
+        { title: '我能注意細節，發現異常時主動回報。', trait: '細心觀察', hint: '具備安全意識', tip: '練習記錄日常變化，異常時依照單位流程即時回報。' },
+        { title: '遇到家屬不合理的要求，我願意理性溝通並尋求協助。', trait: '溝通能力', hint: '懂傾聽並設立界線', tip: '練習平和回應與工作界線，遇到困難時主動向主管尋求協助。' },
+        { title: '面對壓力或突發狀況，我願意冷靜處理並尋求支援。', trait: '適應能力', hint: '有韌性、能應變', tip: '了解緊急聯絡及支援流程，遇到突發狀況時先確保安全。' }
+      ];
+      const options = [ ['不太符合',1], ['部分符合',2], ['非常符合',3] ];
+      const answers = Array(questions.length).fill(null);
+      const list = document.getElementById('questions-list');
+      const progressText = document.getElementById('progress-count');
+      const fill = document.getElementById('progress-fill');
+      const track = document.getElementById('progress-track');
+      const viewButton = document.getElementById('show-result');
+      const result = document.getElementById('result');
+      let lastCompletion = false;
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function buildQuestions() {
+        questions.forEach((q,i) => {
+          const article = document.createElement('article');
+          article.className = 'question-card';
+          article.id = `question-${i+1}`;
+          const choices = options.map(([label,score]) => `
+              <div class="choice">
+                <input type="radio" id="q${i+1}-${score}" name="q${i+1}" value="${score}" aria-label="第 ${i+1} 題：${label}，${score} 分" />
+                <label for="q${i+1}-${score}"><span class="choice-name">${label}</span><small>${score} 分</small></label>
+              </div>`).join('');
+          article.innerHTML = `<div class="question-head"><span class="num">${i+1}</span><span class="ability">${q.trait}</span></div>
+              <h3 id="question-label-${i+1}">${q.title}</h3><p class="hint">${q.hint}</p>
+              <div class="choices" role="radiogroup" aria-labelledby="question-label-${i+1}">${choices}</div>`;
+          list.appendChild(article);
+        });
+      }
+
+      function getResult(total) {
+        if (total >= 20) return {
+          key: 'great',
+          label: '20～24 分｜高度符合',
+          title: '你具備許多適合居服工作的特質！',
+          description: '你展現出多項照顧工作重視的態度與能力，非常適合進一步了解居服職涯。可透過實際工作介紹與專業培訓，探索自己的發展方向。'
+        };
+        if (total >= 15) return {
+          key: 'mid',
+          label: '15～19 分｜具備潛力',
+          title: '你已具備部分照顧工作的特質！',
+          description: '你有不少適合居家照顧工作的基礎，可以從自己較不熟悉的能力開始培養，並透過招募說明會或教育訓練進一步探索。'
+        };
+        return {
+          key: 'grow',
+          label: '8～14 分｜持續探索',
+          title: '你可以再多了解居服工作的內容！',
+          description: '目前的結果可以幫助你看見值得探索的方向。建議先了解工作情境、照顧需求與培訓內容，再評估自己是否感興趣。'
+        };
+      }
+
+      function scrollToResult() {
+        result.scrollIntoView({behavior: reducedMotion ? 'auto' : 'smooth', block: 'start'});
+      }
+
+      function showResults(shouldScroll = false) {
+        if (answers.some(v => v === null)) return;
+        const total = answers.reduce((sum,v) => sum + v,0);
+        const rating = getResult(total);
+        document.getElementById('total-score').textContent = total;
+        document.getElementById('result-label').textContent = rating.label;
+        document.getElementById('result-title').textContent = rating.title;
+        document.getElementById('result-description').textContent = rating.description;
+        document.getElementById('score-breakdown').innerHTML = questions.map((q,i) => `
+          <div class="breakdown-item">
+            <div class="breakdown-line"><strong>${q.trait}</strong><span>${answers[i]}／3 分 · ${options[answers[i]-1][0]}</span></div>
+            <div class="mini-track" aria-label="${q.trait} ${answers[i]} 分，滿分 3 分"><div class="mini-fill" style="width:${answers[i]*100/3}%"></div></div>
+          </div>`).join('');
+        const strong = questions.filter((_,i) => answers[i] === 3);
+        const improving = questions.filter((_,i) => answers[i] < 3);
+        document.getElementById('strengths').innerHTML = strong.length
+          ? `<p>${strong.map(q => q.trait).join('、')}是你自評中表現較突出的特質，值得繼續保持。</p>`
+          : '<p>每一種照顧能力都能透過實際經驗與學習逐步培養，先從感興趣的項目開始。</p>';
+        document.getElementById('improvements').innerHTML = improving.length
+          ? '<ul>' + improving.sort((a,b)=> answers[questions.indexOf(a)] - answers[questions.indexOf(b)]).slice(0,3).map(q=>`<li><strong>${q.trait}：</strong>${q.tip}</li>`).join('') + '</ul>'
+          : '<p>八個面向都給自己最高評價！持續保持學習心態，並在真實照顧情境中累積經驗。</p>';
+        result.classList.add('visible');
+        if (shouldScroll) window.setTimeout(scrollToResult, reducedMotion ? 0 : 260);
+      }
+
+      function updateProgress() {
+        const count = answers.filter(v => v !== null).length;
+        progressText.textContent = `已完成 ${count}／8 題`;
+        fill.style.width = `${count / questions.length * 100}%`;
+        track.setAttribute('aria-valuenow',String(count));
+        viewButton.disabled = count !== questions.length;
+        document.getElementById('action-note').textContent = count === 8
+          ? '已完成全部題目！你的評估結果已產生，也可以修改上面的答案。'
+          : `還差 ${questions.length-count} 題，完成後自動顯示評估結果。`;
+        if(count === questions.length) {
+          showResults(!lastCompletion);
+          lastCompletion = true;
+        } else {
+          result.classList.remove('visible');
+          lastCompletion = false;
+        }
+      }
+
+      function summaryText() {
+        const total = answers.reduce((sum,v)=>sum+v,0);
+        const rating = getResult(total);
+        return [
+          '居服職涯｜適性自我評估',
+          `總分：${total}／24 分`,
+          `評估結果：${rating.label}`, rating.title, rating.description, '',
+          '八項照顧特質：',
+          ...questions.map((q,i)=>`${i+1}. ${q.trait}：${answers[i]}／3 分（${options[answers[i]-1][0]}）`), '',
+          '提醒：僅供自我探索，不作為正式資格或錄用判定。'
+        ].join('\n');
+      }
+
+      async function copySummary() {
+        const content = summaryText();
+        const btn = document.getElementById('copy-result');
+        const original = btn.textContent;
+        try {
+          if(navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(content);
+          } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = content;
+            textarea.style.cssText = 'position:fixed;left:-9999px;top:0';
+            document.body.appendChild(textarea);
+            textarea.focus();textarea.select();
+            const success = document.execCommand('copy');
+            textarea.remove();
+            if(!success) throw new Error('無法複製');
+          }
+          btn.textContent = '✓ 已複製評估摘要';
+        } catch(e) {
+          btn.textContent = '複製失敗，請使用列印功能';
+        }
+        window.setTimeout(()=>{btn.textContent = original;},2400);
+      }
+
+      list.addEventListener('change',event=>{
+        const input = event.target;
+        if(!(input instanceof HTMLInputElement) || input.type !== 'radio') return;
+        const index = Number(input.name.replace('q',''))-1;
+        const value = Number(input.value);
+        if(!Number.isInteger(index) || index < 0 || index >= questions.length || ![1,2,3].includes(value)) return;
+        answers[index] = value;
+        document.getElementById(`question-${index+1}`).classList.add('answered');
+        updateProgress();
+      });
+      viewButton.addEventListener('click',()=>{showResults();scrollToResult();});
+      document.getElementById('print-result').addEventListener('click',()=>window.print());
+      document.getElementById('copy-result').addEventListener('click',copySummary);
+      document.getElementById('reset-answers').addEventListener('click',()=>{
+        answers.fill(null);
+        document.querySelectorAll('.questions input[type="radio"]').forEach(input=>{input.checked=false;});
+        document.querySelectorAll('.question-card').forEach(card=>{card.classList.remove('answered');});
+        result.classList.remove('visible');
+        lastCompletion = false;
+        updateProgress();
+        document.getElementById('questions-title').scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'});
+      });
+      buildQuestions();
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
