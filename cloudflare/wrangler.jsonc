@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/wrangler.json",
+  "name": "caregiver-assessment-api",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "vars": { "ALLOWED_ORIGIN": "https://daqinghs006.github.io" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "caregiver-assessment",
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+    }
+  ]
+}
