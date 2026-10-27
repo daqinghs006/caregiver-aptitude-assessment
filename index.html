@@ -111,6 +111,10 @@
     .coach-panel li::before {content:"• "; font-weight:900;color:#3e9070;}
     .result-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:25px; }
     .disclaimer { color:#7c8980; font-size:12px; margin:20px 0 0; }
+    .privacy-note { margin:14px 0 20px; padding:12px 17px; color:#507667; background:#eff7f1; border-left:4px solid #5bb189; border-radius:10px; font-size:13px; }
+    .submission-status { margin:15px 0 0; font-size:13px; color:#426858; min-height:18px; }
+    .submission-status.error { color:#a74452; }
+    #retry-submit[hidden] { display:none!important; }
     .scoring { display:grid; grid-template-columns:.9fr 2fr; gap:19px; margin:3px 0 35px; }
     .scoring-box { background:#e9f5e9; padding:23px 25px; border-radius:19px; }
     .scoring-box h3 { color:#226a56; margin:0 0 7px; font-size:18px; }
@@ -215,6 +219,7 @@
           <p class="intro-explainer">請依照自己平常的想法與做法，選擇最符合的答案。沒有標準答案，也不用刻意選最高分。</p>
         </div>
 
+        <div class="privacy-note">🔒 <strong>匿名統計說明：</strong>完成全部題目後，系統會在統計服務啟用的情況下匿名回傳八題選項與總分，用來統計整體評估結果；不要求姓名、電話或登入。同一次填答若調整答案，會更新原紀錄。匿名填答無法保證每人只填一次。</div>
         <div class="progress-panel" aria-live="polite" aria-atomic="true">
           <div class="progress-top"><strong>填答進度</strong><span id="progress-count">已完成 0／8 題</span></div>
           <div class="progress-track" role="progressbar" aria-label="完成進度" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
@@ -244,7 +249,9 @@
             <button class="secondary-btn" id="copy-result" type="button">📋 複製結果摘要</button>
             <button class="secondary-btn" id="reset-answers" type="button">↻ 重新填寫</button>
           </div>
-          <p class="disclaimer">提醒：這是一份用來認識自己的非正式職涯探索工具，結果不是錄用標準、資格認定或心理測驗診斷。請搭配實際工作內容、教育訓練及個人興趣綜合考量。作答資料只在目前頁面計算，不會傳送至伺服器。</p>
+          <p id="submission-status" class="submission-status" role="status" aria-live="polite"></p>
+          <button id="retry-submit" class="secondary-btn" type="button" hidden>↻ 重試匿名回傳</button>
+          <p class="disclaimer">提醒：這是一份用來認識自己的非正式職涯探索工具，結果不是錄用標準、資格認定或心理測驗診斷。請搭配實際工作內容、教育訓練及個人興趣綜合考量。統計服務啟用時，完成後會匿名回傳八題得分、總分及匿名紀錄 ID，資料庫不儲存姓名、電話、電子郵件與 IP；若顯示「尚未啟用」或「回傳失敗」，代表該次資料沒有確認儲存。</p>
         </div>
       </section>
 
@@ -261,6 +268,7 @@
     <footer>居服職涯適性自我評估 · 你的每一個答案，都值得被尊重。</footer>
   </div>
 
+  <script src="./config.js"></script>
   <script>
     (() => {
       'use strict';
@@ -283,6 +291,60 @@
       const viewButton = document.getElementById('show-result');
       const result = document.getElementById('result');
       let lastCompletion = false;
+      let submissionId = null;
+      let pendingSubmit = null;
+      let sending = Promise.resolve();
+      let submissionRevision = 0;
+      const apiBase = String(window.CAREGIVER_API_BASE || '').replace(/\/+$/, '');
+      const submitStatus = document.getElementById('submission-status');
+      const retryButton = document.getElementById('retry-submit');
+      function reportSubmit(message, error = false, retry = false) {
+        submitStatus.textContent = message;
+        submitStatus.classList.toggle('error', error);
+        retryButton.hidden = !retry;
+      }
+      async function sendToStatistics(id, snapshot, revision) {
+        try {
+          const res = await fetch(apiBase + '/api/submissions', {
+            method: 'POST', mode: 'cors', cache: 'no-store', keepalive: true,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, answers: snapshot }),
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const data = await res.json();
+          if (!data.ok || !data.stored) throw new Error('未確認儲存');
+          if (revision === submissionRevision && submissionId === id) {
+            reportSubmit('✓ 本次作答已匿名回傳，管理員可於統計後台查看整體結果。');
+          }
+        } catch (error) {
+          if (revision === submissionRevision && submissionId === id) {
+            reportSubmit('⚠ 匿名結果尚未成功儲存，請按「重試匿名回傳」。個人評估結果仍可查看。', true, true);
+          }
+        }
+      }
+      function scheduleAnonymousSubmit(delay = 450) {
+        if (answers.some(value => value === null)) return;
+        if (!/^https:\/\//i.test(apiBase)) {
+          reportSubmit('ℹ 統計資料庫尚未啟用；目前僅顯示個人評估結果，沒有回傳作答資料。');
+          return;
+        }
+        if (!submissionId) {
+          if (!window.crypto || typeof window.crypto.randomUUID !== 'function') {
+            reportSubmit('⚠ 此瀏覽器不支援安全匿名記錄 ID，無法回傳；個人評估不受影響。', true);
+            return;
+          }
+          submissionId = window.crypto.randomUUID();
+        }
+        if (pendingSubmit !== null) window.clearTimeout(pendingSubmit);
+        const id = submissionId;
+        const snapshot = answers.slice();
+        const revision = ++submissionRevision;
+        reportSubmit('正在匿名回傳評估結果……');
+        pendingSubmit = window.setTimeout(() => {
+          pendingSubmit = null;
+          sending = sending.catch(() => {}).then(() => sendToStatistics(id, snapshot, revision));
+        }, delay);
+      }
       const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       function buildQuestions() {
@@ -362,6 +424,7 @@
           ? '已完成全部題目！你的評估結果已產生，也可以修改上面的答案。'
           : `還差 ${questions.length-count} 題，完成後自動顯示評估結果。`;
         if(count === questions.length) {
+          scheduleAnonymousSubmit();
           showResults(!lastCompletion);
           lastCompletion = true;
         } else {
@@ -420,7 +483,12 @@
       viewButton.addEventListener('click',()=>{showResults();scrollToResult();});
       document.getElementById('print-result').addEventListener('click',()=>window.print());
       document.getElementById('copy-result').addEventListener('click',copySummary);
+      retryButton.addEventListener('click',()=>{ if(answers.every(v=>v!==null)) scheduleAnonymousSubmit(0); });
       document.getElementById('reset-answers').addEventListener('click',()=>{
+        if(pendingSubmit !== null) { window.clearTimeout(pendingSubmit); pendingSubmit = null; }
+        submissionRevision++;
+        submissionId = null;
+        reportSubmit('');
         answers.fill(null);
         document.querySelectorAll('.questions input[type="radio"]').forEach(input=>{input.checked=false;});
         document.querySelectorAll('.question-card').forEach(card=>{card.classList.remove('answered');});
